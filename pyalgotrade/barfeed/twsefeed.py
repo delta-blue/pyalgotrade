@@ -1,23 +1,3 @@
-# PyAlgoTrade
-#
-# Copyright 2011-2015 Gabriel Martin Becedillas Ruiz
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#   http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-
-"""
-.. moduleauthor:: Jason Wu
-"""
-
 from pyalgotrade.barfeed import csvfeed
 from pyalgotrade.barfeed import common
 from pyalgotrade.utils import dt
@@ -72,12 +52,12 @@ class RowParser(csvfeed.RowParser):
         return ","
 
     def parseBar(self, csvRowDict):
-        dateTime = self.__parseDate(csvRowDict["Date"])
-        close = float(csvRowDict["Close"])
-        open_ = float(csvRowDict["Open"])
-        high = float(csvRowDict["High"])
-        low = float(csvRowDict["Low"])
-        volume = float(csvRowDict["Volume"])
+        dateTime = self.__parseDate(csvRowDict["Date"].replace(',', ''))
+        close = float(csvRowDict["Close"].replace(',', ''))
+        open_ = float(csvRowDict["Open"].replace(',', ''))
+        high = float(csvRowDict["High"].replace(',', ''))
+        low = float(csvRowDict["Low"].replace(',', ''))
+        volume = float(csvRowDict["Volume"].replace(',', ''))
 
         if self.__sanitize:
             open_, high, low, close = common.sanitize_ohlc(open_, high, low, close)
