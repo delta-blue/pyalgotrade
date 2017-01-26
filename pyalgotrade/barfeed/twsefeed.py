@@ -19,9 +19,16 @@ def parse_date(date):
     # Sample: 2005-12-30
     # This custom parsing works faster than:
     # datetime.datetime.strptime(date, "%Y-%m-%d")
-    year = int(date[0:3]) + 1911
-    month = int(date[4:6])
-    day = int(date[7:9])
+
+    if len(date) >= 9:  #101/12/12
+        year = int(date[0:3]) + 1911
+        month = int(date[4:6])
+        day = int(date[7:9])
+    else:               #98/12/12
+        year = int(date[0:2]) + 1911
+        month = int(date[3:5])
+        day = int(date[6:8])
+
     ret = datetime.datetime(year, month, day)
     return ret
 
